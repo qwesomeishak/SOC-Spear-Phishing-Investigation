@@ -1,0 +1,11 @@
+_time,sender,recipient,subject,src_ip,url,status
+2026-02-03 08:55:12,hr@company.com,john@company.com,Payroll Update,192.168.1.20,,Delivered
+2026-02-03 09:00:05,admin@secure-mail.com,john@company.com,Password Reset Required,185.23.45.2,http://secure-login-alert.com,Delivered
+2026-02-03 09:01:10,john@company.com,,Clicked Link,185.23.45.2,http://secure-login-alert.com,Clicked
+2026-02-03 09:02:45,admin@secure-mail.com,sarah@company.com,Account Verification,185.23.45.2,http://secure-login-alert.com,Delivered
+2026-02-03 09:03:12,sarah@company.com,,Clicked Link,185.23.45.2,http://secure-login-alert.com,Clicked
+2026-02-03 09:04:33,alerts@company.com,admin@company.com,System Alert,192.168.1.100,,Delivered
+2026-02-03 09:05:20,admin@secure-mail.com,james@company.com,Security Notice,185.23.45.2,http://secure-login-alert.com,Delivered
+2026-02-03 09:06:14,james@company.com,,Clicked Link,185.23.45.2,http://secure-login-alert.com,Clicked
+2026-02-03 09:07:02,hr@company.com,sarah@company.com,Policy Update,192.168.1.20,,Delivered
+2026-02-03 09:08:11,admin@secure-mail.com,john@company.com,Urgent Action Required,185.23.45.2,http://secure-login-alert.com,Delivered

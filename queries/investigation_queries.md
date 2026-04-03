@@ -1,49 +1,48 @@
 # Investigation Queries
 
-This section contains the Splunk queries used to investigate the spear phishing activity.
+# Spear Phishing Detection Queries
 
----
-
-## 1. Identify Suspicious Senders
-
-This query identifies the most active email senders and their source IPs.
+## View Suspicious Email Events
 
 index=email
 
-| stats count by sender src_ip
+| table _time, sender, recipient, subject, url, attachment
+
+| sort _time
+
+## Detect Suspicious Sender Domains
+
+index=email
+
+| eval sender_domain=mvindex(split(sender,"@"),1)
+
+| stats count by sender_domain
 
 | sort -count
 
-## 2. Detect Emails Containing URLs (Phishing Indicator)
+## Identify Potential Spoofed Emails
 
-This query filters emails that contain links, which are common in phishing attacks.
+index=email
 
-index=email url=*
+| eval sender_domain=mvindex(split(sender,"@"),1)
 
-| table _time sender recipient url src_ip
+| eval display_name=sender
 
-## 3. Identify Users Who Clicked Malicious Links
+| table _time, sender, sender_domain, subject
 
-This query shows users who interacted with phishing emails.
+## Detect Emails Containing URLs
 
-index=email status="Clicked"
+index=email
 
-| table _time recipient src_ip url
+| search url="http*"
 
-## 4. Extract Domain from Suspicious URLs
+| table _time, sender, recipient, url, subject
 
-This query extracts domains from URLs using rex for analysis.
+## Detect Emails with Attachments
 
-index=email url=*
+index=email
 
-| rex field=url "http://(?<domain>[^/]+)"
+| search attachment="*"
 
-| stats count by domain
+| table _time, sender, recipient, attachment, subject
 
-## 5. Investigate Attacker Activity Timeline
-
-This query reconstructs activity from the suspected malicious IP.
-
-index=email src_ip="185.23.45.2"
-
-| sort _time
